@@ -14,8 +14,12 @@ app.get('/', function(req, res){
 });
 
 
-
-
+// function to render the products page
+app.get('/faq', function(req, res){
+ // res.send("Hello cruel world!"); // This is commented out to allow the index view to be rendered
+  res.render('faq.html', {root: VIEWS}); // use the render command so that the response object renders a HHTML page
+  console.log("FAQ PAge!");
+});
 
 
 

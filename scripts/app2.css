@@ -1,4 +1,3 @@
-
 .body {
   background-color: #555;
   /*background-image: url("/background.jpg");*/
@@ -40,64 +39,7 @@ h1 {
   font-size: 3em;
 }
 
-.navbar {
-    background-color: #48494b !important;
-  color: #ffffff;
-  
-}
-
-.navbar .navbar-toggle{
-
-background: #d9dddc;
-color: #363636;
-  border-color: #d9dddc;
-
-}
-.navbar .navbar-toggle .icon-bar {
-  background-color: #363636;
-}
-
-
-/* Link */
-.navbar .navbar-nav > li > a {
-    color: #d9dddc;
-}
-
-.navbar:hover {
-  background-color: #1DB6CC;
-}
-
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-    color: #363636;
-}
-/* Link */
-.navbar .navbar-nav > li > a {
-    color: #d9dddc;
-}
-
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-    color: #363636;
-}
-
-.navbar .navbar-nav > li > a:hover,
-.navbar .navbar-nav > li > a:focus {
-    color: #333;
-}
-.navbar .navbar-nav > .active > a,
-.navbar .navbar-nav > .active > a:hover,
-.navba .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #E7E7E7;
-}
-.navbar .navbar-nav > .open > a,
-.navbar .navbar-nav > .open > a:hover,
-.navbar .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
-}
-
+.navbar-brand topnav {}
 
 .profile-photo {
   display: block;
@@ -111,12 +53,10 @@ color: #363636;
 
 .content-section-b {
   background-color: #eee;
-  width: 80%;
+  width: 80%
   border-width: 200px;
   border-style: none;
   font-family: "Georgia";
-    margin-left: auto;
-  margin-right: auto;
 }
 
 .lead {
@@ -403,7 +343,7 @@ th {
   margin-bottom: 5px;
 }
 
-/* responsive footer */
+/* If you don't want the footer to be responsive, remove these media queries */
 
 @media (max-width: 880px) {
   .footer-distributed {
