@@ -1,0 +1,170 @@
+.body {
+  background-color: #555;
+  background-image: url("/background.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  min-height: 950px; /* remove this height if needed*/ 
+}
+
+
+.logoIm {
+    width: 60%;  
+}  
+
+
+.navbar {
+    margin-bottom: 0;
+	
+	
+}
+
+.header {
+    height: 100%;
+	width: auto;
+    background-image: url('/background.jpg');
+	background-repeat: no-repeat;
+
+}
+
+
+ul.a {
+    list-style-type: circle;
+}
+	
+.header h1,
+.header h2 {
+    color: black;
+}
+
+h1{
+	color: #1DB6CC;
+	
+	
+}
+
+
+
+.content-section-b {
+    background-color: #eee;
+}
+
+/*footer css*/
+footer {
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+dropdown-toggle {
+data-toggle:dropdown;
+ role: button;
+ aria-haspopup: true;
+ aria-expanded: false;
+}
+
+/*buttons css*/
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #1DB6CC;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 7px #12727F;
+}
+
+.button:hover {background-color: #37A4CC}
+
+.button:active {
+  background-color: #37A4CC;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.btn1 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #1DB6CC;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 7px #12727F;
+}
+.btn2 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #1DB6CC;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 7px #12727F;
+}
+
+/*registration form css*/
+.container {
+    border-radius: 5px;
+    padding: 20px;
+	font-size: 18px;
+}
+
+.col-25 {
+    float: left;
+    width: 15%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/*table css*/
+table { 
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+/*back to top css*/
+#topButton{
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #37A4CC;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#topButton:hover {
+  background-color: #1DB6CC;
+}

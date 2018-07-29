@@ -1,0 +1,19 @@
+{
+  "name": "logcabinsapp",
+  "version": "1.0.0",
+  "description": "WAP Prpject Log Cabins App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+ 
+  "keywords": [
+    "LogCabins"
+  ],
+  "author": "Diana Nevedomska",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/busja19/LogCabinsApp/issues"
+  },
+
+}
