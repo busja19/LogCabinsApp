@@ -1,0 +1,99 @@
+doctype html
+html
+  head
+    title Nordhouse
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=yes')
+    link(rel='stylesheet', href='../app.css', type='text/css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', type='text/css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', type='text/css')
+    link(rel='”stylesheet”', id='”font-awesome-css”', href='”//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css”', type='”text/css”', media='”screen”')
+  body
+    header
+      button#topButton(onclick='topFunction()', title='scroll to top') Top
+      // This is scroll to top button
+      nav.navbar.navbar-defdault(role='navigation')
+        .container.topnav
+          .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='#my-navbar-collapse')
+              span.sr-only Navigation
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand.topnav(href='#')
+              img(src='/Logo_2.jpg', alt='logo')
+            br
+            br
+            br
+            br
+          #my-navbar-collapse.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='/') Home
+              li.dropdown
+                a.dropdown-toggle(href='/products', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  | Products
+                  span.caret
+                // Dropdown menu on nav bar
+                ul.dropdown-menu
+                  li
+                    a(href='/item/1') Bordeaux
+                  li
+                    a(href='/item/2') Melanie
+                  li
+                    a(href='/item/3') Kristie
+                  li
+                    a(href='/item/4') Oscar
+                  li
+                    a(href='/item/5') Nika
+                  li
+                    a(href='/item/6') Dan
+              li
+                a(href='/faq') F.A.Q
+              li
+                a(href='/contact') Contact Us
+      block content
+  footer.footer-distributed
+   .footer-left
+     h3
+       img(src='/Logo_2.jpg', alt='logo')
+     p.footer-links
+       a(href='#') Home
+       | &#x9;&#x9;&#x9;&#x9;&#x9;&middot;
+       a(href='/products') Products
+       | &#x9;&#x9;&#x9;&#x9;&#x9;&middot;
+       a(href='/faq') F.A.Q
+       | &#x9;&#x9;&#x9;&#x9;&#x9;&middot;
+       a(href='/contact') Contact Us
+     br
+     br
+     p.footer-company-name Nordhouse &copy; 2018
+   .footer-center
+     div
+       i.fa.fa-map-marker
+       p
+         span Keatingspark
+         |  Rathcoole, Co. Dublin
+     div
+       i.fa.fa-phone
+       p +353 870871114
+     div
+       i.fa.fa-envelope
+       p
+         a(href='mailto:info@nordhouse.ie') info@nordhouse.ie
+   .footer-right
+      p.footer-company-about
+       span Nordhouse
+       |  The quality of our log cabins is unrivalled. Attention to details, quality materials, speed, first class workmanship are the features that best describe a typical Nordhouse Log house.
+      .footer-icons
+       a(href='https://www.facebook.com/Nordhouse.ie')
+         i.fa.fa-facebook
+       a(href='https://twitter.com/_Nordhouse_')
+         i.fa.fa-twitter
+       a(href='https://www.instagram.com/nordhouse.ie/')
+         i.fa.fa-instagram
+       a(href='#')
+         i.fa.fa-youtube
+ script(src='https://code.jquery.com/jquery-3.2.1.min.js', crossorigin='anonymous')
+ script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js', crossorigin='anonymous')
+ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', crossorigin='anonymous')
