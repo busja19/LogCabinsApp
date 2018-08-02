@@ -1,0 +1,36 @@
+extends layout
+block content
+ .header
+  .container
+       center
+         h2 Products
+  .header
+   section#home
+  .content-section-b
+       .container
+         h3(style='text-align:center')
+           | Pine Wood Log houses and Log Cabins supplier in Co. Dublin!
+         hr
+         .row
+           .col-sm-12
+             p.lead
+               | We enjoy exclusive partnership with a number of Europe’s leading manufacturers of log building, whose accreditation ensure only the highest grade of timber is used throughout our range. We can source exclusive products, offer flexibility in our pricing to meet different budgets and create bespoke buildings to meet individual customer requirements
+               br
+               br
+               | Among the cabins product range, basic garden house models can be found for every garden. It’s a universal range of houses for gardens of various sizes, whatever your needs may be. Here you will find models to use as an elegant storeroom or as an extra room for yourself. You will also find more spacious log cabin models to satisfy your needs whether you are hosting a party or friends staying overnight.
+
+   section#products
+  .content-section-a
+           .grid-container
+              .item
+                h1 #{row.Name}
+                img.pimage(src="#{row.Image1}", alt="#{row.Image1}")
+                img.pimage(src="#{row.Image2}", alt="#{row.Image2}")
+                img.pimage(src="#{row.Image3}", alt="#{row.Image3}")
+                p.itemp &euro;#{row.Price}
+                p.itemp #{row.Price}
+                  //this is a button
+                a.button(href="/item/#{row.Id}") Show 
+                // a.button(href="/show/#{row.Id}") Show Product
+                a.button(href="/edit/#{row.Id}") Edit Product   
+                a.button(href="/delete/#{row.Id}") Delete #{row.Name} 
