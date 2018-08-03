@@ -32,10 +32,12 @@ html
                 a(href='/') Home
               li.dropdown
                 a.dropdown-toggle(href='/products', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | Products
+                  | Products 
                   span.caret
                 // Dropdown menu on nav bar
                 ul.dropdown-menu
+                  li
+                    a(href='/products') All Products
                   li
                     a(href='/item/1') Bordeaux
                   li
@@ -52,6 +54,22 @@ html
                 a(href='/faq') F.A.Q
               li
                 a(href='/contact') Contact Us
+              li
+                a(href='/register') Register
+              li
+                a(href='/login') Log In   
+              li
+                a(href='/logout') Log Out  
+              br
+              br
+              
+              
+              li
+                form(method="post" action="search")
+                 label(for="search") Search:
+                 input(name="search", type="text", placeholder="search for products")
+                 button.button(type="submit") Search
+                
       block content
   footer.footer-distributed
    .footer-left

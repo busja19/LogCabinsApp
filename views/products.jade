@@ -19,11 +19,11 @@ block content
                br
                | Among the cabins product range, basic garden house models can be found for every garden. It’s a universal range of houses for gardens of various sizes, whatever your needs may be. Here you will find models to use as an elegant storeroom or as an extra room for yourself. You will also find more spacious log cabin models to satisfy your needs whether you are hosting a party or friends staying overnight.
 
-   section#products
+ section#products
   .content-section-a
-           .grid-container
-              .item
-                h1 #{row.Name}
+           .row
+              .p.lead
+               h1 #{row.name}
                 img.pimage(src="#{row.Image1}", alt="#{row.Image1}")
                 img.pimage(src="#{row.Image2}", alt="#{row.Image2}")
                 img.pimage(src="#{row.Image3}", alt="#{row.Image3}")
@@ -33,4 +33,4 @@ block content
                 a.button(href="/item/#{row.Id}") Show 
                 // a.button(href="/show/#{row.Id}") Show Product
                 a.button(href="/edit/#{row.Id}") Edit Product   
-                a.button(href="/delete/#{row.Id}") Delete #{row.Name} 
+                a.button(href="/delete/#{row.Id}") Delete #{row.Name}   
