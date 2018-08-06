@@ -20,7 +20,7 @@ var mysql = require('mysql'); // allow access to sql
 app.use(express.static("scripts")); // use scripts
 //app.use(express.static("images")); // use images
 app.use(express.static(__dirname + '/images'));
-app.use( express.static( "public" ) );
+
 
 //app.use(session({ secret: "topsecret" })); // required to make the session accessable throughouty the application
 app.use(session({ secret: 'anything', resave: true, saveUninitialized: true }));
@@ -148,29 +148,7 @@ app.get('/item/:id', function(req, res){
   console.log("Now you are on the Individual product page!");
 });
 
-
-
- // Show it again 
- // function to render the products page
-app.get('/show/:id', function(req, res){
- // res.send("Hello cruel world!"); // This is commented out to allow the index view to be rendered
- let sql = 'SELECT * FROM products WHERE Id = "'+req.params.id+'";'
- let query = db.query(sql, (err, res1) =>{
-  if(err)
-  throw(err);
  
-  res.render('showit', {root: VIEWS, res1}); // use the render command so that the response object renders a HHTML page
-  
- });
- 
- console.log("Now you are on the products page!");
-});
- 
- // Show it again
-
-
-
-
 
 
  // function to render the create page
