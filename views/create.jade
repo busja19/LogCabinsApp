@@ -1,0 +1,25 @@
+extends layout
+block content
+    .row
+      h1 Welcome , let's add a product
+      .formHold
+        h1.itemtitle Add the Product Form
+        form(method="post")
+       
+          fieldset
+            label(for="name") Log Cabin Name:
+            input(name="name", type="text", placeholder="Log Cabin Name")
+      
+            label(for="price") Log Cabin Price:
+            input(name="price", type="text", placeholder="Price")
+      
+            label(for="image1") Product Image:
+            input(name="image1", type="text", placeholder="Image")
+
+            label(for="image2") Product Image:
+            input(name="image2", type="text", placeholder="Next Image")
+            
+            label(for="image3") Product Image:
+            input(name="image3", type="text", placeholder="Drawings")
+            
+            button.button(type="submit") Create the Product

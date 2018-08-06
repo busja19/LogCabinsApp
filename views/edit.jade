@@ -1,0 +1,20 @@
+extends layout
+block content
+    .row
+      h1 Welcome , let's edit this product
+      .formHold
+        h1.itemtitle Edit the Product Form
+          each row in res1
+           form(method="post")
+            fieldset
+             label(for="newname") LogCabin Name:
+             input(name="newname", type="text", value="#{row.Name}")
+             label(for="newprice") LogCabin Price:
+             input(name="newprice", type="text", value="#{row.Price}")
+             label(for="newimage1") Image:
+             input(name="newimage1", type="text", value="#{row.Image}")
+             label(for="newimage2") Image:
+             input(name="newimage2", type="text", value="#{row.Image}")
+             label(for="newimage3") Image:
+             input(name="newimage3", type="text", value="#{row.Image}")
+             button.button(type="edit") Edit the Product

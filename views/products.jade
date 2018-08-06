@@ -1,3 +1,6 @@
+   link#bootstrap-css(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+script(src='//code.jquery.com/jquery-1.11.1.min.js')
 extends layout
 block content
  .header
@@ -6,7 +9,7 @@ block content
          h2 Products
   .header
    section#home
-  .content-section-b
+   .content-section-b
        .container
          h3(style='text-align:center')
            | Pine Wood Log houses and Log Cabins supplier in Co. Dublin!
@@ -18,19 +21,19 @@ block content
                br
                br
                | Among the cabins product range, basic garden house models can be found for every garden. It’s a universal range of houses for gardens of various sizes, whatever your needs may be. Here you will find models to use as an elegant storeroom or as an extra room for yourself. You will also find more spacious log cabin models to satisfy your needs whether you are hosting a party or friends staying overnight.
+               br
 
- section#products
-  .content-section-a
-           .row
-              .p.lead
-               h1 #{row.name}
+   section#products 
+   .content-section-a
+         .prod-container
+           each row in res1
+              .item 
+                h1.product #{row.Name}
                 img.pimage(src="#{row.Image1}", alt="#{row.Image1}")
-                img.pimage(src="#{row.Image2}", alt="#{row.Image2}")
-                img.pimage(src="#{row.Image3}", alt="#{row.Image3}")
-                p.itemp &euro;#{row.Price}
-                p.itemp #{row.Price}
-                  //this is a button
-                a.button(href="/item/#{row.Id}") Show 
-                // a.button(href="/show/#{row.Id}") Show Product
-                a.button(href="/edit/#{row.Id}") Edit Product   
-                a.button(href="/delete/#{row.Id}") Delete #{row.Name}   
+                p.price &euro;#{row.Price}
+                a.btn1(href="/item/#{row.Id}") Show #{row.Name}
+           
+                a.btn1(href="/edit/#{row.Id}") Edit Log Cabin
+   
+                a.btn1(href="/delete/#{row.Id}") Delete Log Cabin   
+               

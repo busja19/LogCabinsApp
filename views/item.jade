@@ -1,0 +1,17 @@
+extends layout
+block content
+   section#products 
+   .content-section-a
+         .prod-container
+           each row in res1
+              .item 
+                h1.product #{row.Name}
+
+                img.pimage(src="#{row.Image1}", alt="#{row.Image1}")
+                img.pimage(src="row.Image1")
+                img.pimage(src="", alt="")
+                img.pimage(src="images/#{row.Image2}", alt="#{row.Image2}")
+                img.pimage(src="../images/#{row.Image3}", alt="#{row.Image3}")
+                p.price &euro;#{row.Price}
+                a.btn1(href="/item/#{row.Id}") Show
+                a.btn1(href="/delete/#{row.Id}") Delete #{row.Name}
