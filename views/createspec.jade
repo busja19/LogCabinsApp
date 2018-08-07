@@ -1,0 +1,31 @@
+extends layout
+block content
+    .row
+      h1 Add new specification
+      .formHold
+        h1.itemtitle Log Cabins Specifications
+        form(method="post")
+       
+          fieldset
+            label(for="wall") External wall thickness:
+            input(name="wall", type="text", placeholder="External wall thickness")
+      
+            label(for="area") Area:
+            input(name="area", type="text", placeholder="Area")
+      
+            label(for="roof") Roof Area:
+            input(name="roof", type="text", placeholder="Roof Area")
+            
+            label(for="room") Number of rooms:
+            input(name="room", type="text", placeholder="Number of rooms")
+            
+            label(for="window") Window & door type:
+            input(name="window", type="text", placeholder="Window & door type")
+
+            label(for="windows") Window Size mm:
+            input(name="windows", type="text", placeholder="Window Size mm")
+            
+            label(for="doors") Door size mm:
+            input(name="doors", type="text", placeholder="Door size mm")
+            
+            button.button(type="submit") Create new product Specification

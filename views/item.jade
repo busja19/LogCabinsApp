@@ -1,11 +1,11 @@
 extends layout
 block content
-   section#products 
+   section#specificat
    .content-section-a
          .prod-container
            each row in res1
               .item 
-                h1.product #{row.Name}
+                h2.product #{row.Name}
                 img.pimage(src='../../#{row.Image1}', alt='#{row.Image1}')
                 img.pimage(src='../../#{row.Image2}', alt='#{row.Image2}')
                 img.pimage(src='../../#{row.Image3}', alt='#{row.Image3}')

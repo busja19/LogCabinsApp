@@ -34,11 +34,7 @@ user: 'logcabin',
 password: 'Rl6WOB!-1XEx',
 database: 'logcabin'
 }); 
-//host: 'den1.mysql6.gear.host',
-//user: 'nodedatabase',
-//password: 'Kn6E69-nlY9-',
-//database: 'nodedatabase'
-//}); 
+
 
 db.connect((err) =>{
  if(err){
@@ -61,8 +57,42 @@ app.get('/createtable', function(req,res){
 });
 //end of database table
 
+// this is my Products details table
+app.get('/createspectable', function(req,res){
+ let sql = 'CREATE TABLE spec (Id int NOT NULL AUTO_INCREMENT PRIMARY KEY, Wall varchar(255), Area varchar(255), Roof varchar(255), Room int(10), Window varchar(255), WindowS varchar(255), DoorS varchar(255));'
+ let query = db.query(sql,(err,res)=>{
+  if (err) throw err;
+ console.log(res);
+ });
+  res.send("Product Specification Table")
+});
+
+app.get('/addspec', function(req,res){
+let sql = "ALTER TABLE spec ADD CONSTRAINT FK_prodspec FOREIGN KEY (Id) REFERENCES products(Id);";
+let query = db.query(sql,(err,res)=>{
+  if (err) throw err;
+  console.log(res);
+
+});
+  res.send("amend Specification Table");
+});
 
 
+//alter data type
+app.get('/alterspec', function(req,res){
+let sql = "ALTER TABLE spec MODIFY COLUMN Room varchar(255);";
+ let query = db.query(sql,(err,res)=>{
+ if (err) throw err;
+ console.log(res);
+
+});
+  res.send("amend Specification Table")
+});
+
+
+//end of alter table
+
+// this is my uiser reg table
 app.get('/createusertable', function(req,res){
  let sql = 'CREATE TABLE users (Id int NOT NULL AUTO_INCREMENT PRIMARY KEY, Name varchar(255), Email varchar(255), Password varchar(255),);'
  let query = db.query(sql,(err,res)=>{
@@ -76,6 +106,16 @@ app.get('/createusertable', function(req,res){
 //users log in table - END
 
 
+app.get('/insertspec', function(req,res){
+ let sql = 'INSERT INTO spec (Wall, Area, Roof, Room, Window, WindowS, DoorS, Id) VALUES ("28 mm", "6.8 m²", "11.9 m²", "1", "4 mm Glass (Single Glazing)", "900×1450 mm", "1340×1800 mm", 3);'
+ let query = db.query(sql,(err,res)=>{
+  if (err) throw err;
+  console.log(res);
+  
+ });
+  res.send("new spec created")
+ 
+});
 
 
 
@@ -95,22 +135,6 @@ app.get('/queryme', function(req,res){
 });
 // End SQL QUERY Just for show Example
 
-// SQL QUERY Just for show Example
-app.get('/info', function(req,res){
- let sql = 'SELECT * FROM INFORMATION_SCHEMA.TABLES'
- let query = db.query(sql,(err,res)=>{
-  if (err) throw err;
-  console.log(res);
-  
- });
-  res.send("info table....")
- 
-});
-// End SQL QUERY Just for show Example
-
-
-
-
 
 
 app.get('/', function(req, res){
@@ -127,7 +151,7 @@ app.get('/products', function(req, res){
  let query = db.query(sql, (err, res1) =>{
   if(err)
   throw(err);
-  res.render('products', {root: VIEWS, res1}); // use the render command so that the response object renders a HHTML page
+  res.render('products', {root: VIEWS, res1}); // use the render command so that the response object renders a HTML page
  });
  console.log("Now you are on the products page!");
  console.log("The Status of this user is " + req.session.email); // Log out the session value
@@ -140,12 +164,22 @@ app.get('/item/:id', function(req, res){
   if(err)
   throw(err);
  
-  res.render('item', {root: VIEWS, res1}); // use the render command so that the response object renders a HHTML page
-  
+  res.render('item', {root: VIEWS, res1}); // use the render command so that the response object renders a HTML page
  });
- 
- 
   console.log("Now you are on the Individual product page!");
+});
+
+
+app.get('/spec/:id', function(req, res){
+ let sql2 = 'SELECT * FROM spec WHERE Id = "'+req.params.id+'";' 
+ let query = db.query(sql2, (err, res2) =>{
+  
+  if(err)
+  throw(err);
+ 
+  res.render('itemspec', {root: VIEWS, res2}); // use the render command so that the response object renders a HTML page
+ });
+  console.log("spec page!");
 });
 
  
@@ -172,6 +206,25 @@ res.render('index', {root: VIEWS});
 });
 
 
+ // function to render the createspec page
+app.get('/createspec', function(req, res){
+ 
+  res.render('createspec', {root: VIEWS});
+  console.log("Now you are ready to create specs for products!");
+});
+
+ // function to add data to database based on button press
+app.post('/createspec', function(req, res2){
+  var name = req.body.name
+  let sql = 'INSERT INTO spec (Wall, Area, Roof, Room, Window, WindowS, DoorS) VALUES ("'+req.body.wall+'", '+req.body.area+', "'+req.body.roof+'", "'+req.body.room+'", "'+req.body.window+'", "'+req.body.windows+'",, "'+req.body.doors+'");'
+  let query = db.query(sql,(err,res)=>{
+  if (err) throw err;
+  console.log(res2);
+  console.log("new spec created")
+ });
+  
+res.render('index', {root: VIEWS});
+});
 
 
 
@@ -193,7 +246,7 @@ app.get('/edit/:id', function(req, res){
  //let query = db.query(sql, (err, res1) =>{
  // if(err)
  // throw(err);
-  res.render('edit', {root: VIEWS, res1}); // use the render command so that the response object renders a HHTML page
+  res.render('edit', {root: VIEWS, res1}); // use the render command so that the response object renders a HTML page
   
  });
  

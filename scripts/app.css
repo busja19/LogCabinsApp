@@ -541,7 +541,7 @@ th {
   transform: translate(-50%, 5px);
 }
 
-
+/*products page, products items*/
 
 .prod-container {
   display: grid;
@@ -568,14 +568,24 @@ th {
 
 
 .product {
-   display: block;
-    color: #4CAF50;
+    display: block;
+    color: #1f2023;
     text-align: center;
+    font-size: 26px;
     padding: 10px 10px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 26px;
 }
 
+.product1 {
+    display: block;
+    color: #1f2023;
+    text-align: justify;
+    font-size: 26px;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-size: 26px;
+}
 
 .price {
    display: block;
