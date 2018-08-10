@@ -1,0 +1,29 @@
+link#bootstrap-css(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+script(src='//code.jquery.com/jquery-1.11.1.min.js')
+extends layout
+block content
+ .header
+  .container
+       center
+         h2 We’re here to help so please give us a shout. Use the form below to drop us an e-mail. Old-fashioned phone calls work too!
+    .container
+     .row
+      .col-md-6.col-md-offset-3
+       form.form-horizontal#contact-form(action='/contact', method='post', role='form')
+           fieldset
+            .form-group
+              label.col-md-3.control-label(for='name') Name *
+              .col-md-9  
+                input#name.form-control(name='name', type='text', placeholder='Your name', required='required')
+            .form-group
+              label.col-md-3.control-label(for='email') Email *
+              .col-md-9
+                input#email.form-control(name='email', type='text', placeholder='Your email', required='required')
+            .form-group
+              label.col-md-3.control-label(for='message') Message *
+              .col-md-9
+                textarea#exampleTextarea.form-control(name='message', placeholder='Enter your message here', rows='3', required='required')
+                br
+            button.btn1(type='submit') Submit
+.form-group

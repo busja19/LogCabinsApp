@@ -1,0 +1,22 @@
+link#bootstrap-css(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+script(src='//code.jquery.com/jquery-1.11.1.min.js')
+extends layout
+block content
+  .header
+   .container
+       center
+         h2 Reviews
+    .container
+     .row
+      .col-md-6.col-md-offset-3
+        legend.text-center See what our customers are saying about us
+         each review in reviews
+          form.form-horizontal
+          fieldset
+            .form-group
+               h2.itemtitle #{review.name}
+               p.itemp #{review.content}
+               
+               a.btn1(href="/editreview/#{review.id}") Edit #{review.Name}
+               a.btn1(href="/deletereview/#{review.id}") Delete #{review.id}

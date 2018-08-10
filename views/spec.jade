@@ -1,0 +1,31 @@
+link#bootstrap-css(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+script(src='//code.jquery.com/jquery-1.11.1.min.js')
+extends layout
+block content
+  .header
+   .container
+       center
+         h2 Log Cabin Specification
+  .header
+     .prod-container
+           each row in res2
+              .item 
+                h1.product #{row.Id}
+                p.itemp Wall: #{row.Wall}
+                p.itemp Area: #{row.Area}
+                p.itemp Roof: #{row.Roof}
+                p.itemp Room: #{row.Room}
+                p.itemp Window: #{row.Window}
+                p.itemp WindowS: #{row.WindowS}
+                p.itemp DoorS: #{row.DoorS}
+
+                a.btn1(href="/spec/#{row.Id}") Show #{row.Name}
+           
+                a.btn1(href="/editspec/#{row.Id}") Edit Spec
+   
+                a.btn1(href="/deletespec/#{row.Id}") Delete Spec  
+                
+                
+                
+               

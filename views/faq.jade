@@ -1,0 +1,74 @@
+link#bootstrap-css(href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css', rel='stylesheet')
+script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+script(src='//code.jquery.com/jquery-1.11.1.min.js')
+extends layout
+block content
+ .header
+  .container
+   br
+   br
+   br
+   .alert.alert-warning.alert-dismissible(role='alert')
+     button.close(type='button', data-dismiss='alert')
+       span(aria-hidden='true') ×
+       span.sr-only Close
+     |         Frequently Asked Questions
+   br
+   #accordion.panel-group
+     .faqHeader General questions
+     .panel.panel-default
+       .panel-heading
+         h4.panel-title
+           a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseOne') What material is used to make log cabins?
+       #collapseOne.panel-collapse.collapse.in
+         .panel-body
+           | All 
+           strong pine and spruce timber
+           |  used in our production is sourced from sustainable forests from the northern regions of Russia (Arkchangelsk and Carelia).
+           | 					It is very resistant, have high density and resin saturation. If the conditions, under which the trees gave grown,
+           | 					are more north extreme, the trees turn out to be more resistant and qualitative – perfect for a log home that will last many generations.
+     .panel.panel-default
+       .panel-heading
+         h4.panel-title
+           a.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapseTen') Will I be able to use the cabin all year round?
+       #collapseTen.panel-collapse.collapse
+         .panel-body
+           | Our bigger cabins and log houses are designed for use throughout the year, after all log cabins have been in use in Scandinavia for as long as people have been living there!
+           | We are also able to insulate your cabin which means warmth in the winter and that your cabin will stay cool in the summer.s.
+     .panel.panel-default
+       .panel-heading
+         h4.panel-title
+           a.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapseEleven') How do you preserve the timber?
+       #collapseEleven.panel-collapse.collapse
+         .panel-body
+           | We import the best quality Artic Pine heartwood. Any coating that stops the breathing process of the logs shortens its life. Most preservatives are toxic and unhealthy.
+           | If one has to colour the building, we recommend natural pigment paint for the log wall exterior.
+     .faqHeader Delivery
+     .panel.panel-default
+       .panel-heading
+         h4.panel-title
+           a.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo') How long will my log home take to be delivered?
+       #collapseTwo.panel-collapse.collapse
+         .panel-body
+           | In general, 
+           strong a log house 
+           |  package is ready to be delivered within 6-10 weeks from the order date.
+           | 					This will give you plenty of time for preparation of the groundwork on which you will place your log cabin or log house.
+           | 					The transport time of course depends on the distance and delivery method. The house package is delivered to the customer by truck,
+           | 					trailer or sea container – whichever is the optimal delivery method for the customer..
+     .faqHeader Other
+     .panel.panel-default
+       .panel-heading
+         h4.panel-title
+           a.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapseFour') Can I live in a Log House all year round?
+       #collapseFour.panel-collapse.collapse
+         .panel-body
+           | All our Log Homes are manufactured to very highest standards. They will be cosy in winter and cool in summer, and therefore ideal for year-round use.
+     .panel.panel-default
+       .panel-heading
+         h4.panel-title
+           a.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapseSeven') What can I use my log building for?
+       #collapseSeven.panel-collapse.collapse
+         .panel-body
+           | You can use the log building as a house, a holiday home, a lodge, an office, a gym, a play house, the list goes on…
+ 

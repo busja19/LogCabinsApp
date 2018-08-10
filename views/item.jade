@@ -1,14 +1,43 @@
+meta(name='viewport', content='width=device-width, initial-scale=1')
+link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
 extends layout
 block content
-   section#specificat
+ .header
+  .container
+       center
+         h2 Products
+  .header
+   section#specification
    .content-section-a
          .prod-container
-           each row in res1
-              .item 
-                h2.product #{row.Name}
-                img.pimage(src='../../#{row.Image1}', alt='#{row.Image1}')
-                img.pimage(src='../../#{row.Image2}', alt='#{row.Image2}')
-                img.pimage(src='../../#{row.Image3}', alt='#{row.Image3}')
-                p.price &euro;#{row.Price}
-                a.btn1(href="/edit/#{row.Id}") Edit Log Cabin     
-                a.btn1(href="/delete/#{row.Id}") Delete #{row.Name}
+           each row in res2
+               .w3-content.w3-display-container
+                  h2.product #{row.Name}
+                  img.mySlides(src='../../#{row.Image1}', alt='#{row.Image1}')
+                  img.mySlides(src='../../#{row.Image2}', alt='#{row.Image2}')
+                  img.mySlides(src='../../#{row.Image3}', alt='#{row.Image3}')
+                  button.w3-button.w3-black.w3-display-left(onclick='plusDivs(-1)') ❮
+                  button.w3-button.w3-black.w3-display-right(onclick='plusDivs(1)') ❯
+
+                  p.price &euro;#{row.Price}
+                  a.btn1(href="/edit/#{row.Id}") Edit Log Cabin     
+                  a.btn1(href="/delete/#{row.Id}") Delete #{row.Name}
+                
+                   script.
+                    var slideIndex = 1;
+                    showDivs(slideIndex);
+                    function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                    }
+                    function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) {
+                     x[i].style.display = "none";
+                     }
+                     x[slideIndex-1].style.display = "block";
+                     }
+
+                

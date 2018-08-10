@@ -1,12 +1,12 @@
 extends layout
 block content
-   section#products 
-   .content-section-a
+     section#products 
+     .content-section-a
          .prod-container
            each row in res2
               .item 
                 h1 Product Specification
-                h2.product1 Id:  #{row.Id}
+                h2.product1 Id: #{row.Id}
                 h2.product1 External wall thickness: #{row.Wall} 
                 h2.product1 Area: #{row.Area}
                 h2.product1 Roof Area: #{row.Roof}
@@ -16,4 +16,4 @@ block content
                 h2.product1 Door size mm: #{row.DoorS}
 
 
-                a.btn1(href="/edit/#{row.Id}") Edit Log Cabin     
+                a.btn1(href="/editspec/#{row.Id}") Edit Spec  

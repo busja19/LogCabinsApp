@@ -1,0 +1,22 @@
+extends layout
+block content
+   section#product specifications
+   .content-section-a
+         .prod-container
+           each row in res3
+              .item 
+                h2.product #{row.Name}
+                img.pimage(src='../../#{row.Image1}', alt='#{row.Image1}')
+                img.pimage(src='../../#{row.Image2}', alt='#{row.Image2}')
+                img.pimage(src='../../#{row.Image3}', alt='#{row.Image3}')
+                p.price &euro;#{row.Price}
+    
+                p.itemp Wall: #{row.Wall}
+                p.itemp Area: #{row.Area}
+                p.itemp Roof: #{row.Roof}
+                p.itemp Room: #{row.Room}
+                p.itemp Window: #{row.Window}
+                p.itemp WindowS: #{row.WindowS}
+                p.itemp DoorS: #{row.DoorS}
+ 
+                 a.btn1(href="/item/#{row.Id}") Show #{row.Name}

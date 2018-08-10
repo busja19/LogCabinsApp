@@ -1,12 +1,14 @@
 extends layout
 block content
     .row
-      h1 Add new specification
       .formHold
-        h1.itemtitle Log Cabins Specifications
+        legend.text-center Log Cabins Specifications
         form(method="post")
        
           fieldset
+            label(for="id") Id:
+            input(name="id", type="text", placeholder="ID")
+            
             label(for="wall") External wall thickness:
             input(name="wall", type="text", placeholder="External wall thickness")
       
