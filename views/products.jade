@@ -4,7 +4,9 @@ script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 extends layout
 block content
  .header
+  
   .container
+    
        center
          h2 Products
   .header
@@ -24,7 +26,9 @@ block content
                br
 
    section#products 
-   .content-section-a
+    a.btn1(href="/create") Create New Product
+    .content-section-a
+
          .prod-container
            each row in res1
               .item 
@@ -39,8 +43,7 @@ block content
                 p.itemp WindowS: #{row.WindowS}
                 p.itemp DoorS: #{row.DoorS}
                 a.btn1(href="/item/#{row.Id}") Show #{row.Name}
-                a.btn1(href="/edit/#{row.Wall}") Edit Log Cabin
-                a.btn1(href="/delete/#{row.Id}") Delete Log Cabin   
+
                 
                
                

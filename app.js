@@ -3,23 +3,19 @@ var app = express();
 const path = require('path');
 //path.join(__dirname, 'public')
 const VIEWS = path.join(__dirname, 'views');
+var passport = require('passport');
 
 var nodemailer = require('nodemailer');
-//const express = require('express');
-//const app = express();
 
-var moment = require('moment');
-moment().format();
+
+
 
 var session = require('express-session');
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
-//const bodyParser = require('body-parser');
-
 var fs = require('fs');
 app.set('view engine', 'jade');
-
 
 
 var mysql = require('mysql'); // allow access to sql
@@ -32,13 +28,14 @@ app.use(express.static("models"));//use models
 
 var reviews = require("./models/reviews.json");
 
-//app.use(passport.initialize());
-//app.use(passport.session());
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 //app.use(session({ secret: "topsecret" })); // required to make the session accessable throughouty the application
-app.use(session({ secret: 'anything', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: 'mysecret', resave: true, saveUninitialized: true }));
 
+
+const LocalStrategy = require('passport-local').Strategy;
 
 const db = mysql.createConnection({ //sql connection
  
@@ -59,9 +56,47 @@ db.connect((err) =>{
 });
 
 
+app.get('/index', (req, res) => res.send("Welcome "+req.query.username+"!!"));
+app.get('/created', (req, res) => res.send("error logging in"));
+
+//passport
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+  User.findById(id, function(err, user) {
+    cb(err, user);
+  });
+});
+
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+      UserDetails.findOne({
+        username: username
+      }, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+
+        if (!user) {
+          return done(null, false);
+        }
+
+        if (user.password != password) {
+          return done(null, false);
+        }
+        return done(null, user);
+      });
+  }
+));
+
+
+
 // this is my Products Database table
 app.get('/createtable', function(req,res){
- let sql = 'CREATE TABLE products (Id int NOT NULL AUTO_INCREMENT PRIMARY KEY, Name varchar(255), Price int, Image1 varchar(255), Image2 varchar(255), Image3 varchar(255));'
+ let sql = 'CREATE TABLE products (Id int NOT NULL AUTO_INCREMENT PRIMARY KEY, Name varchar(255), Price varchar(255), Image1 varchar(255), Image2 varchar(255), Image3 varchar(255));'
  let query = db.query(sql,(err,res)=>{
   if (err) throw err;
   console.log(res);
@@ -99,7 +134,7 @@ let sql = "ALTER TABLE spec MODIFY COLUMN Room varchar(255);";
  console.log(res);
 
 });
-  res.send("amend Specification Table")
+  res.send("amend Specification Table 2")
 });
 
 
@@ -107,7 +142,7 @@ let sql = "ALTER TABLE spec MODIFY COLUMN Room varchar(255);";
 //end of alter table
 
 
-
+//Join Spec and Products
 app.get('/join', function(req,res){
 let sql = "SELECT * FROM products LEFT JOIN spec ON products.Id = spec.Id UNION ALL SELECT * FROM products RIGHT JOIN spec ON products.id = spec.id WHERE products.id IS NULL;";
  let query = db.query(sql,(err,res)=>{
@@ -125,9 +160,9 @@ let sql = "SELECT * FROM products LEFT JOIN spec ON products.Id = spec.Id UNION 
   if(err)
   throw(err);
  
-  res.render('join', {root: VIEWS, res3}); // use the render command so that the response object renders a HTML page
+  res.render('join', {root: VIEWS, res3}); 
  });
-  console.log("join page!");
+  console.log("Product and spec page!");
 });
 
 
@@ -137,10 +172,7 @@ app.get('/createusertable', function(req,res){
  let query = db.query(sql,(err,res)=>{
   if (err) throw err;
   console.log(res);
-  
  });
-  res.send("Table Created .... users available!")
- 
 });
 //users log in table - END
 
@@ -161,33 +193,15 @@ app.get('/specId', function(req,res){
  let query = db.query(sql,(err,res)=>{
   if (err) throw err;
   console.log(res);
-  
  });
   res.send("spec ID ref updated")
- 
 });
-
-
-
-// SQL QUERY Just for show Example
-app.get('/queryme', function(req,res){
- let sql = 'SELECT * FROM products'
- let query = db.query(sql,(err,res)=>{
-  if (err) throw err;
-  console.log(res);
-  
- });
-  res.send("Look in the console....")
- 
-});
-// End SQL QUERY Just for show Example
-
-
+//end of SQL tables and amend tables
 
 app.get('/', function(req, res){
   res.render('index.jade', {root: VIEWS});
   
-   console.log("The status of this user is" + req.session.email); // log out session value
+   console.log("The status of this user is" + req.session.email);
   console.log("now you are on the home page!");
 });
 
@@ -233,7 +247,6 @@ app.get('/item/:id', function(req, res){
  let query = db.query(sql, (err, res2) =>{
   if(err)
   throw(err);
- 
   res.render('item', {root: VIEWS, res2}); // use the render command so that the response object renders a HTML page
  });
   console.log("Now you are on the Individual product page!");
@@ -246,9 +259,7 @@ app.get('/item/:id', function(req, res){
   
   if(err)
   throw(err);
- 
-  res.render('join', {root: VIEWS, res3}); // use the render command so that the response object renders a HTML page
- });
+  res.render('join', {root: VIEWS, res3}); 
   console.log("join page!");
 });
 
@@ -262,7 +273,7 @@ app.get('/spec/:id', function(req, res){
   if(err)
   throw(err);
  
-  res.render('itemspec', {root: VIEWS, res2}); // use the render command so that the response object renders a HTML page
+  res.render('itemspec', {root: VIEWS, res2}); 
  });
   console.log("spec page!");
 });
@@ -313,12 +324,9 @@ res.render('created', {root: VIEWS});
 });
 
 
-
-//////////////////////////////////
-////////////////////////////////// NOT UPDATED FOR MY APP
 // function to edit database adta based on button press and form
 app.get('/edit/:id', function(req, res){
-  //if(req.session.email == "LoggedIn"){
+ if(req.session.email == "LoggedIn"){
  let sql = 'SELECT * FROM products WHERE Id = "'+req.params.id+'";'
  let query = db.query(sql, (err, res1) =>{
   if(err)
@@ -327,46 +335,42 @@ app.get('/edit/:id', function(req, res){
  
  res.render('edit', {root: VIEWS, res1});   
     });
- //}else {
-  //res.render('login', {root:VIEWS});
+}else {
+  res.render('login', {root:VIEWS});
 
- //}
- console.log("Now you are on the edit product page!");
+ }
+ console.log("Edit product page!");
 });
-
-
-
-// edit Product Spec PAge
-app.get('/editspec/:id', function(req, res){
-   //if(req.session.email == "LoggedIn"){
- let sql2 = 'SELECT * FROM spec WHERE Id = "'+req.params.id+'";'
- let query = db.query(sql2, (err, res2) =>{
-  if(err)
-  throw(err);
-  res.render('editspec', {root: VIEWS, res2}); // use the render command so that the response object renders a HTML page
- });
- 
-// }else{
- //res.render('login', {root:VIEWS});
-  
-// }
- console.log("Product Spec Page!");
-});
-
-
-
-
-//end product edit page
 
 app.post('/edit/:id', function(req, res){
-let sql = 'UPDATE products SET Name = "'+req.body.newname+'", Price = "'+req.body.newprice+'", Image1 = "'+req.body.newimage+'" WHERE Id = "'+req.params.id+'";'
-let query = db.query(sql, (err, res) =>{
+let sql = 'UPDATE products SET Name = "'+req.body.newname+'", Image1 = "'+req.body.newimage1+'", Image2 = "'+req.body.newimage2+'", Image3 = "'+req.body.newimage3+'" WHERE Id = "'+req.params.id+'";'
+let query = db.query(sql, (err, res1) =>{
  if(err) throw err;
  console.log(res);
 })
 
 res.redirect("/item/" + req.params.id);
 });
+
+
+// edit Product Spec PAge
+app.get('/editspec/:id', function(req, res){
+  // if(req.session.email == "LoggedIn"){
+ let sql2 = 'SELECT * FROM spec WHERE Id = "'+req.params.id+'";'
+ let query = db.query(sql2, (err, res2) =>{
+  if(err)
+  throw(err);
+  res.render('editspec', {root: VIEWS, res2}); 
+ });
+ 
+//}else{
+ //res.render('login', {root:VIEWS});
+  
+//}
+ console.log("EditProduct Spec Page!");
+});
+
+
 
 app.post('/editspec/:id', function(req, res){
 let sql2 = 'UPDATE spec SET Wall = "'+req.body.newwall+'", Area = "'+req.body.newarea+'", Roof = "'+req.body.newroof+'", Room = "'+req.body.newroom+'", Window = "'+req.body.newwindow+'", WindowS = "'+req.body.newwindows+'", DoorS = "'+req.body.newdoors+'" WHERE Id = "'+req.params.id+'";'
@@ -377,26 +381,25 @@ let query = db.query(sql2, (err, res2) =>{
 
 res.redirect("/spec/" + req.params.id);
 });
+//end product spec edit page
 
 
  // function to delete database
 app.get('/delete/:id', function(req, res){
- // res.send("Hello cruel world!"); // This is commented out to allow the index view to be rendered
  let sql = 'DELETE FROM products WHERE Id = "'+req.params.id+'";'
  let query = db.query(sql, (err, res1) =>{
   if(err)
   throw(err);
-  res.redirect('/products'); // use the render command so that the response object renders a HHTML page
+  res.redirect('/products'); 
  });
 });
 
 app.get('/deletespec/:id', function(req, res){
- // res.send("Hello cruel world!"); // This is commented out to allow the index view to be rendered
  let sql = 'DELETE FROM spec WHERE Id = "'+req.params.id+'";'
  let query = db.query(sql2, (err, res2) =>{
   if(err)
   throw(err);
-  res.redirect('/spec'); // use the render command so that the response object renders a HHTML page
+  res.redirect('/spec'); 
  });
 });
 
@@ -404,13 +407,13 @@ app.get('/deletespec/:id', function(req, res){
 
 // function to render the FAQ page
 app.get('/faq', function(req, res){
-  res.render('faq', {root: VIEWS}); // use the render command so that the response object renders a HHTML page
+  res.render('faq', {root: VIEWS}); 
   console.log("FAQ Page!");
 });
 
 
 
-
+//reviews page
 app.get('/reviews', function(req, res){
  res.render("reviews", {reviews:reviews}
  );
@@ -419,114 +422,100 @@ app.get('/reviews', function(req, res){
 
 // route to render add JSON page
 app.get('/addreview', function(req, res){
- // res.send("Hello cruel world!"); // This is commented out to allow the index view to be rendered
   res.render('addreview', {root: VIEWS});
-  console.log("Your Feedback is valuable!");
+  console.log("feedback!");
 });
 
 // post request to add JSON REVIEW
 
-
+//add reviews
 app.post('/addreview', function(req, res){
-	var count = Object.keys(reviews).length; // Tells us how many products we have its not needed but is nice to show how we can do this
+	var count = Object.keys(reviews).length; 
 	console.log(count);
 	
-	// This will look for the current largest id in the reviews JSON file this is only needed if you want the reviews to have an auto ID which is a good idea 
-	
-	function getMax(reviews , id) {
+		function getMax(reviews , id) {
 		var max
 		for (var i=0; i<reviews.length; i++) {
 			if(!max || parseInt(reviews[i][id]) > parseInt(max[id]))
 				max = reviews[i];
-			
-		}
+    }
 		return max;
 	}
 	
-	var maxPpg = getMax(reviews, "id"); // This calls the function above and passes the result as a variable called maxPpg.
-	newId = maxPpg.id + 1;  // this creates a nwe variable called newID which is the max Id + 1
-	console.log(newId); // We console log the new id for show reasons only
-	
-	// create a new product based on what we have in our form on the add page 
-	
+	var maxPpg = getMax(reviews, "id");
+	newId = maxPpg.id + 1; 
+	console.log(newId);
 	var review = {
-		name: req.body.name, // name called from the add.jade page textbox
-		id: newId, // this is the variable created above
-		content: req.body.content, // content called from the add.jade page textbox
+		name: req.body.name,
+		id: newId, 
+		content: req.body.content,
 
 	};
-		console.log(review) // Console log the new product 
-	var json  = JSON.stringify(reviews); // Convert from object to string
+		console.log(review) 
+	var json  = JSON.stringify(reviews); 
 	
-	// The following function reads the json file then pushes the data from the variable above to the reviews JSON file. 
+ 
 	fs.readFile('./models/reviews.json', 'utf8', function readFileCallback(err, data){
-							if (err){
+		if (err){
 		throw(err);
 	 }else {
-		reviews.push(review); // add the information from the above variable
-		json = JSON.stringify(reviews, null , 4); // converted back to JSON the 4 spaces the json file out so when we look at it it is easily read. So it indents it. 
-		fs.writeFile('./models/reviews.json', json, 'utf8'); // Write the file back
+		reviews.push(review);
+		json = JSON.stringify(reviews, null , 4); 
+		fs.writeFile('./models/reviews.json', json, 'utf8'); 
 		
 	}});
 	res.redirect("/reviews")
 });
+// End oofJSON
 
-// End JSON
-
+//edit reviews
 app.get('/editreview/:id', function(req, res){
  function chooseProd(indOne){
-   return indOne.id === parseInt(req.params.id)
-  
- }
+   return indOne.id === parseInt(req.params.id)}
  
  console.log("Id of this review is " + req.params.id);
- // declare a variable called indOne which is a filter of reviews based on the filtering function above 
   var indOne = reviews.filter(chooseProd);
- // pass the filtered JSON data to the page as indOne
  res.render('editreview' , {indOne:indOne});
   console.log("Edit Review Page Shown");
  });
 
 app.post('/editreview/:id', function(req, res){
  var json = JSON.stringify(reviews);
- var keyToFind = parseInt(req.params.id); // Id passed through the url
- var data = reviews; // declare data as the reviews json file
- var index = data.map(function(review){review.id}).keyToFind // use the paramater passed in the url as a pointer to find the correct review to edit
+ var keyToFind = parseInt(req.params.id); 
+ var data = reviews; 
+ var index = data.map(function(review){review.id}).keyToFind 
   //var x = req.body.name;
  var y = req.body.content
  var z = parseInt(req.params.id)
  reviews.splice(index, 1, {name: req.body.name, content: y, id: z});
  json = JSON.stringify(reviews, null, 4);
- fs.writeFile('./models/reviews.json', json, 'utf8'); // Write the file back
+ fs.writeFile('./models/reviews.json', json, 'utf8'); 
  res.redirect("/reviews");
 });
 
-
+//delete reviews
 app.get('/deletereview/:id', function(req, res){
  var json = JSON.stringify(reviews);
- var keyToFind = parseInt(req.params.id); // Id passed through the url
+ var keyToFind = parseInt(req.params.id);
  var data = reviews;
  var index = data.map(function(d){d['id'];}).indexOf(keyToFind)
  
  reviews.splice(index, 1);
  
  json = JSON.stringify(reviews, null, 4);
- fs.writeFile('./models/reviews.json', json, 'utf8'); // Write the file back
+ fs.writeFile('./models/reviews.json', json, 'utf8'); 
  res.redirect("/reviews");
 });
 
 
 
 //this is my search button functionality
-
 app.post('/search', function(req, res){
- 
  let sql = 'SELECT * FROM products WHERE Name LIKE "%'+req.body.search+'%";'
  let query = db.query(sql, (err,res1) =>{
   if(err)
   throw(err);
- // res.redirect("/error")
-  
+   
   res.render('products', {root: VIEWS, res1});
   console.log("good search")
  });
@@ -549,32 +538,30 @@ db.query('INSERT INTO users (Name, Email, Password) VALUES ("'+req.body.name+'",
   res.redirect('/')
 });
 
-
-//render log in page
 app.get('/login', function(req, res){
   res.render('login', {root: VIEWS});
- });
+});
+
 
 
  app.post('/login', function(req, res) {
-  var whichOne = req.body.name; // What does the user type in the name text box
-  var whichPass = req.body.password; // What doe the user type in the password text box
+  var whichOne = req.body.name;
+  var whichPass = req.body.password;
   
-   let sql3 = 'SELECT name, password FROM users WHERE name= "'+whichOne+'"'
-   let query = db.query(sql3, (err, res3) => {
+   let sql2 = 'SELECT name, password FROM users WHERE name= "'+whichOne+'"'
+   let query = db.query(sql2, (err, res2) => {
     if(err) throw err;
-    console.log(res3);
+    console.log(res2);
     
-    var passx= res3[0].password
-    var passxn= res3[0].name
+    var passx= res2[0].password
+    var passxn= res2[0].name
     console.log("You logged in with " + passx + " and name " + passxn );
     req.session.email = "LoggedIn";
   
     if(passx == whichPass){
-    console.log("you are logged in as " + passx + " , " + whichPass);
+    console.log("It Worked! Logged in with: " + passx + " , " + whichPass);
     
-   res.redirect("/products");
-   
+   res.redirect("/");
   }
   else{res.redirect("login");}
    //res.render("index.jade");
@@ -583,13 +570,19 @@ app.get('/login', function(req, res){
  
   });
 
+//LOG OUT ROUTE
+app.get('/logout', function(req, res){
+ res.render('logout', {root:VIEWS});
+ req.session.destroy(session.email);
+})
 
+//END LOG OUT ROUTE
+
+
+//contact page route
 app.get('/contact', function(req, res){
   res.render('contact', {root: VIEWS});
  });
-
-
-
 
 
 app.post('/contact', function (req, res) {
@@ -620,25 +613,10 @@ app.post('/contact', function (req, res) {
     }
   });
 });
+//end of contact page
 
 
 
-
-
-
-
-//LOG OUT ROUTE
-
-  
-app.get('/logout', function(req, res){
- res.render('index', {root:VIEWS});
- req.session.destroy(session.email);
- 
-})
-
-//END LOG OUT ROUTE
-
-//this is my search button - end
 
 app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0" , function(){
   console.log("My App is running!...")

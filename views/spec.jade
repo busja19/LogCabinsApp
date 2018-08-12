@@ -3,8 +3,12 @@ script(src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
 script(src='//code.jquery.com/jquery-1.11.1.min.js')
 extends layout
 block content
+
+              
   .header
-   .container
+    a.btn1(href="/createspec") Create New Spec  
+    .container
+     
        center
          h2 Log Cabin Specification
   .header
@@ -26,6 +30,5 @@ block content
    
                 a.btn1(href="/deletespec/#{row.Id}") Delete Spec  
                 
-                
-                
+
                

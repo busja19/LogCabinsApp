@@ -1,0 +1,14 @@
+extends layout
+block content
+ .header
+   .row
+      legend.text-center.h1  
+        p header
+        h1 Hello?
+        |   {{#if user}}
+        p Hello {{username}}
+        |   {{else}}
+        p
+          | Please 
+          a(href='/users/login') Log In
+        |   {{/if}}

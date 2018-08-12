@@ -1,6 +1,7 @@
 extends layout
 block content
-    .row
+   .header
+     .row
       .formHold
         legend.text-center Log Cabins Specifications
         form(method="post")
@@ -30,4 +31,4 @@ block content
             label(for="doors") Door size mm:
             input(name="doors", type="text", placeholder="Door size mm")
             
-            button.button(type="submit") Create new product Specification
+            button.btn1(type="submit") Create new product Specification

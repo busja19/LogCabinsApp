@@ -22,7 +22,12 @@ block content
                   p.price &euro;#{row.Price}
                   a.btn1(href="/edit/#{row.Id}") Edit Log Cabin     
                   a.btn1(href="/delete/#{row.Id}") Delete #{row.Name}
+                  br
+                  br
+                  a.btn1(href="/editspec/#{row.Id}") Edit Spec
+                  a.btn1(href="/deletespec/#{row.Id}") Delete Spec 
                 
+                   // script for sliding images
                    script.
                     var slideIndex = 1;
                     showDivs(slideIndex);
